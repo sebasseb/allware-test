@@ -63,5 +63,96 @@ INSERT INTO ModeloAuto (modelo, id_marca) VALUES
 INSERT INTO Solicitudes (id_vendedor, patente, id_marca_vehiculo, id_modelo_vehiculo, precio_vehiculo) VALUES
 (2, 'MNOP123', 1, 4, 20000);
 
+GO
+
+CREATE PROCEDURE ObtenerTop3MarcasMasSolicitadas
+AS
+BEGIN
+    SELECT TOP 3 
+        MarcaAuto.marca AS Marca,
+        COUNT(Solicitudes.id) AS CantidadDeSolicitudes
+    FROM 
+        Solicitudes
+    JOIN 
+        MarcaAuto ON Solicitudes.id_marca_vehiculo = MarcaAuto.id
+    GROUP BY 
+        MarcaAuto.marca
+    ORDER BY 
+        CantidadDeSolicitudes DESC;
+END;
+GO
 
 
+CREATE PROCEDURE ObtenerSolicitudesMesActual
+AS
+BEGIN
+    SELECT 
+        Solicitudes.* 
+    FROM 
+        Solicitudes
+    WHERE 
+        MONTH(Solicitudes.fecha_solicitud) = MONTH(GETDATE())
+        AND YEAR(Solicitudes.fecha_solicitud) = YEAR(GETDATE());
+END;
+
+GO
+
+CREATE PROCEDURE ObtenerVendedorConMenosSolicitudesUltimos30Dias
+AS
+BEGIN
+    SELECT TOP 1 
+        Vendedor.nombre AS NombreDelVendedor,
+        COUNT(Solicitudes.id) AS CantidadDeSolicitudes
+    FROM 
+        Vendedor
+    LEFT JOIN 
+        Solicitudes ON Vendedor.id = Solicitudes.id_vendedor 
+        AND Solicitudes.fecha_solicitud >= DATEADD(DAY, -30, GETDATE())
+    GROUP BY 
+        Vendedor.nombre
+    ORDER BY 
+        CantidadDeSolicitudes ASC;
+END;
+
+GO
+
+CREATE PROCEDURE ObtenerModelosSinSolicitudes
+AS
+BEGIN
+    SELECT 
+        ModeloAuto.modelo AS Modelo,
+        MarcaAuto.marca AS Marca
+    FROM 
+        ModeloAuto
+    JOIN 
+        MarcaAuto ON ModeloAuto.id_marca = MarcaAuto.id
+    LEFT JOIN 
+        Solicitudes ON ModeloAuto.id = Solicitudes.id_modelo_vehiculo
+    WHERE 
+        Solicitudes.id IS NULL;
+END;
+
+
+GO
+
+CREATE PROCEDURE ObtenerTop3MesesConMasVentas
+AS
+BEGIN
+    SELECT TOP 3 
+        FORMAT(Solicitudes.fecha_solicitud, 'MMMM yyyy') AS MesAno,
+        SUM(Solicitudes.precio_vehiculo) AS MontoTotalEnVentas
+    FROM 
+        Solicitudes
+    GROUP BY 
+        FORMAT(Solicitudes.fecha_solicitud, 'MMMM yyyy')
+    ORDER BY 
+        MontoTotalEnVentas DESC;
+END;
+
+GO
+
+EXEC ObtenerTop3MarcasMasSolicitadas;
+EXEC ObtenerSolicitudesMesActual;
+EXEC ObtenerVendedorConMenosSolicitudesUltimos30Dias;
+EXEC ObtenerModelosSinSolicitudes;
+EXEC ObtenerTop3MesesConMasVentas;

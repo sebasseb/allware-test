@@ -1,5 +1,0 @@
-EXEC ObtenerTop3MarcasMasSolicitadas;
-EXEC ObtenerSolicitudesMesActual;
-EXEC ObtenerVendedorConMenosSolicitudesUltimos30Dias;
-EXEC ObtenerModelosSinSolicitudes;
-EXEC ObtenerTop3MesesConMasVentas;
