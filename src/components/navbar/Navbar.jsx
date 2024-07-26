@@ -21,6 +21,7 @@ const LinkList = styled.ul`
     display: flex;
     list-style: none;
     gap: 20px;
+    padding: 0 5rem;
 `;
 
 const ListItem = styled.li``;
