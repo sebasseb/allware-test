@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import StyledButton from '../../components/button/StyledButton'
 
 const Container = styled.div`
     width: 100wv;
@@ -33,10 +34,10 @@ function Navbar() {
         <Nav>
             <LinkList>
                 <ListItem>
-                    <Link style={{textDecoration: 'none'}} to="/">Formulario</Link>
+                    <Link style={{textDecoration: 'none', color: '#002eff'}} to="/"><StyledButton outline={true} >Formulario</StyledButton></Link>
                 </ListItem>
                 <ListItem>
-                    <Link style={{textDecoration: 'none'}} to="/list">Lista Formulario</Link>
+                <Link style={{textDecoration: 'none', color: '#002eff'}} to="/list"><StyledButton outline={true} >Lista Formulario</StyledButton></Link>
                 </ListItem>
             </LinkList>
         </Nav>
