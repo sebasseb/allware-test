@@ -4,7 +4,7 @@ import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Lista from "./views/lista/Lista";
 import Formulario from "./views/formulario/Formulario";
-
+import {media} from './helpers/media';
 import { Routes, Route } from "react-router-dom";
 
 const routes = [
@@ -23,7 +23,11 @@ const MainContainer = styled.main`
   justify-content: center;
   width: 100%;  
   padding: 0;
-  margin-bottom: 10rem;
+    margin-bottom: 10rem;
+
+  ${media.desktop`
+  margin-bottom: 0;
+  `}
 `;
 
 function App() {

@@ -3,8 +3,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Button = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
+padding: 0 1rem;
+  font-size: .8rem;
   border-radius: 100px;
   cursor: pointer;
   border: none;
@@ -21,6 +21,7 @@ const Button = styled.button`
     background-color: #c0c0c0;
     cursor: not-allowed;
   }
+  height: 40px;
 
   ${({ outline }) =>
     outline &&

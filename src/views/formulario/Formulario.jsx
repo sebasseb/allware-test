@@ -19,6 +19,12 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 90%;
+
+  ${media.desktop`
+  width: 40%;
+
+  `}
+  
 `;
 
 const SellerSection = styled.section`
