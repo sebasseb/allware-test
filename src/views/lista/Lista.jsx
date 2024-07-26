@@ -49,36 +49,6 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    id: 1,
-    name: "Juan Perez",
-    rut: "12.345.678-9",
-    plate: "AB1234",
-    brand: "Toyota",
-    model: "Corolla",
-    color: "Rojo",
-  },
-  {
-    id: 2,
-    name: "Pedro Perez",
-    rut: "12.345.678-9",
-    plate: "AZX123",
-    brand: "Toyota",
-    model: "Corolla",
-    color: "Rojo",
-  },
-  {
-    id: 3,
-    name: "Juan Perez",
-    rut: "12.345.678-9",
-    plate: "RED123",
-    brand: "Toyota",
-    model: "Corolla",
-    color: "Rojo",
-  },
-];
-
 function Lista() {
   return (
     <Container>
@@ -93,7 +63,7 @@ function Lista() {
           </p>
         </TableDescrirption>
 
-        <Table data={data} columns={columns} />
+        <Table columns={columns} />
       </TableContainer>
     </Container>
   );
